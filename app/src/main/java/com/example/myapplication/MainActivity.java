@@ -2,10 +2,13 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +35,21 @@ public class MainActivity extends AppCompatActivity {
 
         String usuario = preferencias.getString("Eusuario","");
         String password = preferencias.getString("Epassword","");
+
+        if(usuario.length() == 0){
+            Toast.makeText(this,"No has escrito nada",Toast.LENGTH_LONG).show();
+        }
+        else{
+            if(Eusuario.equals(usuario) && Epassword.equals(password)){
+                Toast.makeText(this,"Usuario correcto",Toast.LENGTH_LONG).show();
+
+                Intent i = new Intent(MainActivity.this, tareas_main.class);
+                startActivity(i);
+                finish();
+            }
+            else{
+                Toast.makeText(this,"Usuario o contraseña incorrecta", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
